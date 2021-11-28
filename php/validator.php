@@ -19,12 +19,12 @@ function DataValidation($firstName, $lastName, $validationText = array(
         http_response_code(422);
         $response['firstName'] = $validationText['FirstNameEmpty'];
 
-    } elseif (strlen($firstName)<3) {
+    } elseif (mb_strlen($firstName)<3) {
 
         http_response_code(422);
         $response['firstName'] = $validationText['FirstName<3'];
 
-    } elseif (strlen($firstName)>60) {
+    } elseif (mb_strlen($firstName)>60) {
 
         http_response_code(422);
         $response['firstName'] = $validationText['FirstName>60'];
@@ -37,12 +37,12 @@ function DataValidation($firstName, $lastName, $validationText = array(
 
         http_response_code(422);
         $response['lastName'] = $validationText['LastNameEmpty'];
-    } elseif(strlen($lastName)<3) {
+    } elseif(mb_strlen($lastName)<3) {
 
         http_response_code(422);
         $response['lastName'] = $validationText['LastName<3'];
 
-    } elseif (strlen($lastName)>60) {
+    } elseif (mb_strlen($lastName)>60) {
 
         http_response_code(422);
         $response['lastName'] = $validationText['LastName>60'];
