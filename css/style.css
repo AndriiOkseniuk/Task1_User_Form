@@ -1,0 +1,100 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+  }
+  
+
+
+.container {
+    display: flex;
+    align-items: center;
+    max-width: 900px;
+    height: 100vh;
+    padding: 0 24px;
+    margin: 0 auto;
+}
+
+.form_wrapper {
+    border: 2px darkgrey solid;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.23);
+}
+
+.form {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding: 24px;
+}
+
+.form legend {
+    font-size: 28px;
+    color: rgba(0, 0, 0, 0.781);
+    width: max-content;
+}
+
+
+/* Inputs */
+
+.input_wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.input_wrapper .input{
+    max-width: 300px;
+    height: 30px;
+    padding: 0 5px;
+}
+
+.helper_text{
+    font-size: 13px;
+    color: rgb(66, 66, 66);
+}
+
+.error_text{
+    font-size: 13px;
+    color: rgb(211, 12, 12);
+}
+.error_text2{
+    font-size: 13px;
+    color: rgb(211, 12, 12);
+}
+
+
+
+
+/* Button */
+.btn_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.form_btn {
+    width: min-content;
+    cursor: pointer;
+    padding: 5px 30px;
+    background-color: inherit;
+    transition: background-color 0.1s linear;
+    border: 2px rgb(226, 102, 70) solid;
+    border-radius: 5px;
+    color: rgb(226, 102, 70);
+}
+
+.form_btn:hover {
+    background-color: rgba(226, 102, 0, 0.048);
+}
+
+.form_btn:active {
+    background-color: rgba(226, 102, 0, 0.185);
+}
