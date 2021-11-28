@@ -62,9 +62,9 @@ function Fetch(data) {
                 let p = document.createElement("p")
                 p.innerHTML = `Success!
                 <br>
-                First Name: ${responsMessage[0].UserData.FirstName},
+                Your name: ${responsMessage[0].UserData.FirstName};
                 <br> 
-                Last Name: ${responsMessage[0].UserData.LastName}`
+                Your Lastname: ${responsMessage[0].UserData.LastName}`
                 p.style.color = "green";
                 p.style.position = "absolute";
                 p.style.right = "10px";
@@ -91,7 +91,7 @@ function Fetch(data) {
 
                 } else {
                     FirstNameErrorText.classList.remove('error_text')
-                    FirstNameErrorText.innerHTML = "Helper text firstName"
+                    FirstNameErrorText.innerHTML = "Enter your name"
                 }
 
 
@@ -100,7 +100,7 @@ function Fetch(data) {
                     LastNameErrorText.innerHTML = lastNameText
                 } else {
                     LastNameErrorText.classList.remove('error_text')
-                    LastNameErrorText.innerHTML = "Helper text lastName"
+                    LastNameErrorText.innerHTML = "Enter your last name"
                 }
             }
         })
@@ -112,9 +112,9 @@ function Fetch(data) {
 function defaultStyle() {
 
     FirstNameErrorText.classList.remove('error_text')
-    FirstNameErrorText.innerHTML = "Helper text firstName"
+    FirstNameErrorText.innerHTML = "Enter your name"
 
     LastNameErrorText.classList.remove('error_text')
-    LastNameErrorText.innerHTML = "Helper text lastName"
+    LastNameErrorText.innerHTML = "Enter your last name"
 
 }

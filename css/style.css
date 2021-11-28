@@ -24,7 +24,6 @@ body {
 }
 
 .form_wrapper {
-    border: 2px darkgrey solid;
     border-radius: 10px;
     width: 100%;
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.23);

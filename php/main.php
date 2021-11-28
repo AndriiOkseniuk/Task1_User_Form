@@ -7,6 +7,12 @@ $firstName = $_POST["firstName"];
 $lastName = $_POST["lastName"];
 
 
+$firstName = trim($firstName);
+$lastName = trim($lastName);
+$firstName = htmlspecialchars($firstName);
+$lastName = htmlspecialchars($lastName);
+
+
 $resultValidation = DataValidation($firstName, $lastName);
 
 
