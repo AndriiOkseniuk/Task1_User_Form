@@ -22,15 +22,16 @@ form.addEventListener('submit', (e) => {
 
 function Fetch(data) {
     fetch('./php/main.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => 
+        {
 
-            //Message "Unable to establish a connection to the database"
+           // Message "Unable to establish a connection to the database"
             if (response.status === 503) {
                 response.text().then(message => {
                     let p = document.createElement("p")
@@ -47,9 +48,10 @@ function Fetch(data) {
                 });
             }
 
+            return response.text()
+
         })
         .then(data => {
-
             const responsMessage = JSON.parse(data)
 
             //Successful saving of data
@@ -57,9 +59,25 @@ function Fetch(data) {
                 firstName.value = ''
                 lastName.value = ''
 
-                defaultStyle()
+                let p = document.createElement("p")
+                p.innerHTML = `Success!
+                <br>
+                First Name: ${responsMessage[0].UserData.FirstName},
+                <br> 
+                Last Name: ${responsMessage[0].UserData.LastName}`
+                p.style.color = "green";
+                p.style.position = "absolute";
+                p.style.right = "10px";
+                p.style.top = "10px";
+    
+                setTimeout(() => {
+                    p.remove();
+                }, 3000);
+                
+                form.append(p);
 
-            } 
+                defaultStyle()
+            }
 
             //Displaying Validation Error Messages
             else {
@@ -84,12 +102,9 @@ function Fetch(data) {
                     LastNameErrorText.classList.remove('error_text')
                     LastNameErrorText.innerHTML = "Helper text lastName"
                 }
-
-
             }
-
         })
-        .catch(error => console.error(error))
+        .catch (error => console.error(error))
 }
 
 
