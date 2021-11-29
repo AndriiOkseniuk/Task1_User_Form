@@ -7,9 +7,10 @@ import {
 } from './main.js'
 
 
-export let StatusDataValodatorJs = false
+let FirstNameIsValid = false
+let LastNameIsValid = false
 
-export const errorMessage = {
+const errorMessage = {
     "FirstNameEmpty": "First Name field is requrire",
     "LastNameEmpty": "Last Name field is requrire",
     "FirstNameless3": "First Name must be more than 3 characters",
@@ -43,19 +44,19 @@ function ValidatorFirstName() {
     if (firstName.value === '') {
         FirstNameErrorText.classList.add('error_text')
         FirstNameErrorText.innerHTML = errorMessage.FirstNameEmpty
-        StatusDataValodatorJs = false
+        FirstNameIsValid = false
     } else if (firstName.value.length < 3) {
         FirstNameErrorText.classList.add('error_text')
         FirstNameErrorText.innerHTML = errorMessage.FirstNameless3
-        StatusDataValodatorJs = false
+        FirstNameIsValid = false
     } else if (firstName.value.length > 60) {
         FirstNameErrorText.classList.add('error_text')
         FirstNameErrorText.innerHTML = errorMessage.FirstNameMore60
-        StatusDataValodatorJs = false
+        FirstNameIsValid = false
     }
     else {
         defaultStyle('FirstName')
-        StatusDataValodatorJs = true
+        FirstNameIsValid = true
     }
 }
 
@@ -63,18 +64,26 @@ function ValidatorLastName() {
     if (lastName.value === '') {
         LastNameErrorText.classList.add('error_text')
         LastNameErrorText.innerHTML = errorMessage.LastNameEmpty
-        StatusDataValodatorJs = false
+        LastNameIsValid = false
     } else if (lastName.value.length < 3) {
         LastNameErrorText.classList.add('error_text')
         LastNameErrorText.innerHTML = errorMessage.LastNameless3
-        StatusDataValodatorJs = false
+        LastNameIsValid = false
     } else if (lastName.value.length > 60) {
         LastNameErrorText.classList.add('error_text')
         LastNameErrorText.innerHTML = errorMessage.LastNameMore60
-        StatusDataValodatorJs = false
+        LastNameIsValid = false
     }
     else {
         defaultStyle('LastName')
-        StatusDataValodatorJs = true
+        LastNameIsValid = true
     }
+}
+
+
+export {
+    FirstNameIsValid,
+    LastNameIsValid,
+    ValidatorFirstName,
+    ValidatorLastName
 }

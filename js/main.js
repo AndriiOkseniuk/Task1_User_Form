@@ -1,11 +1,14 @@
-import { StatusDataValodatorJs, errorMessage } from './validator.js'
+import {
+    FirstNameIsValid,
+    LastNameIsValid,
+    ValidatorFirstName,
+    ValidatorLastName
+} from './validator.js'
 
 const firstName = document.getElementById("firstName")
 const lastName = document.getElementById("lastName")
 const FirstNameErrorText = document.getElementsByClassName("FirstName_errortext")[0]
 const LastNameErrorText = document.getElementsByClassName("LastName_errortext")[0]
-const sabmit_btn = document.getElementsByClassName("form_btn")[0]
-
 
 const form = document.getElementById("form")
 
@@ -19,14 +22,17 @@ form.addEventListener('submit', (e) => {
     };
 
     //If the inputs are empty, a validation error is reported
-    if (firstName.value === '' && lastName.value === '') {
-        FirstNameErrorText.classList.add('error_text')
-        FirstNameErrorText.innerHTML = errorMessage.FirstNameEmpty
-        LastNameErrorText.classList.add('error_text')
-        LastNameErrorText.innerHTML = errorMessage.LastNameEmpty
+    if (firstName.value === '') {
+        ValidatorFirstName()
+    } 
+    
+    if (lastName.value === '') {
+        ValidatorLastName()
     }
 
-    if (StatusDataValodatorJs) {
+
+    //Successful form submit
+    if (FirstNameIsValid && LastNameIsValid) {
         Fetch(data)
     }
 
@@ -134,4 +140,10 @@ function defaultStyle(errorText = 'all') {
 
 }
 
-export { firstName, lastName, FirstNameErrorText, LastNameErrorText, sabmit_btn, defaultStyle }
+export {
+    firstName,
+    lastName,
+    FirstNameErrorText,
+    LastNameErrorText,
+    defaultStyle
+}
