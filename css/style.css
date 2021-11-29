@@ -90,6 +90,14 @@ body {
     color: rgb(226, 102, 70);
 }
 
+.form_btn:disabled{
+    background-color: grey;
+    color: grey;
+    cursor: default;
+    text-decoration: none;
+    pointer-events: none;
+}
+
 .form_btn:hover {
     background-color: rgba(226, 102, 0, 0.048);
 }

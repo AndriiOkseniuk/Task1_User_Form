@@ -1,7 +1,10 @@
+import { StatusDataValodatorJs, errorMessage } from './validator.js'
+
 const firstName = document.getElementById("firstName")
 const lastName = document.getElementById("lastName")
 const FirstNameErrorText = document.getElementsByClassName("FirstName_errortext")[0]
 const LastNameErrorText = document.getElementsByClassName("LastName_errortext")[0]
+const sabmit_btn = document.getElementsByClassName("form_btn")[0]
 
 
 const form = document.getElementById("form")
@@ -15,7 +18,17 @@ form.addEventListener('submit', (e) => {
         lastName: lastName.value,
     };
 
-    Fetch(data)
+    //If the inputs are empty, a validation error is reported
+    if (firstName.value === '' && lastName.value === '') {
+        FirstNameErrorText.classList.add('error_text')
+        FirstNameErrorText.innerHTML = errorMessage.FirstNameEmpty
+        LastNameErrorText.classList.add('error_text')
+        LastNameErrorText.innerHTML = errorMessage.LastNameEmpty
+    }
+
+    if (StatusDataValodatorJs) {
+        Fetch(data)
+    }
 
 })
 
@@ -28,10 +41,9 @@ function Fetch(data) {
         },
         body: JSON.stringify(data)
     })
-        .then(response => 
-        {
+        .then(response => {
 
-           // Message "Unable to establish a connection to the database"
+            // Message "Unable to establish a connection to the database"
             if (response.status === 503) {
                 response.text().then(message => {
                     let p = document.createElement("p")
@@ -69,11 +81,11 @@ function Fetch(data) {
                 p.style.position = "absolute";
                 p.style.right = "10px";
                 p.style.top = "10px";
-    
+
                 setTimeout(() => {
                     p.remove();
                 }, 3000);
-                
+
                 form.append(p);
 
                 defaultStyle()
@@ -104,17 +116,22 @@ function Fetch(data) {
                 }
             }
         })
-        .catch (error => console.error(error))
+        .catch(error => console.error(error))
 }
 
 
 
-function defaultStyle() {
+function defaultStyle(errorText = 'all') {
 
-    FirstNameErrorText.classList.remove('error_text')
-    FirstNameErrorText.innerHTML = "Enter your name"
+    if (errorText === 'all' || errorText === 'FirstName') {
+        FirstNameErrorText.classList.remove('error_text')
+        FirstNameErrorText.innerHTML = "Enter your name"
+    } else if (errorText === 'all' || errorText === 'LastName') {
 
-    LastNameErrorText.classList.remove('error_text')
-    LastNameErrorText.innerHTML = "Enter your last name"
+        LastNameErrorText.classList.remove('error_text')
+        LastNameErrorText.innerHTML = "Enter your last name"
+    }
 
 }
+
+export { firstName, lastName, FirstNameErrorText, LastNameErrorText, sabmit_btn, defaultStyle }
