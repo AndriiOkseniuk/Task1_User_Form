@@ -18,7 +18,7 @@ const form = document.getElementById("form")
 let ThereWasFormSubmission = false
 
 
-form_message__btn.addEventListener("click", () =>{
+form_message__btn.addEventListener("click", () => {
     form_message_container.style.display = "none";
 })
 
@@ -46,6 +46,7 @@ form.addEventListener('submit', (e) => {
     if (FirstNameIsValid && LastNameIsValid) {
         Fetch(data)
     }
+
 })
 
 
@@ -126,11 +127,26 @@ function Fetch(data) {
 
 function defaultStyle(errorText = 'all') {
 
-    if (errorText === 'all' || errorText === 'FirstName') {
+    if (errorText === 'FirstName') {
+        resetStyleFirstName()
+    }
+
+    if (errorText === 'LastName') {
+        resetStyleLastName()
+    }
+
+    if (errorText === 'all') {
+        resetStyleFirstName()
+        resetStyleLastName()
+    }
+
+    function resetStyleFirstName() {
         FirstNameErrorText.classList.remove('error_text')
         FirstNameErrorText.innerHTML = "Enter your name"
         firstName.classList.remove('invalidStyle')
-    } else if (errorText === 'all' || errorText === 'LastName') {
+    }
+
+    function resetStyleLastName() {
         LastNameErrorText.classList.remove('error_text')
         LastNameErrorText.innerHTML = "Enter your last name"
         lastName.classList.remove('invalidStyle')
