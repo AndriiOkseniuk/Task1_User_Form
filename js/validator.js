@@ -4,6 +4,7 @@ import {
     FirstNameErrorText,
     LastNameErrorText,
     defaultStyle,
+    ThereWasFormSubmission
 } from './main.js'
 
 
@@ -34,9 +35,9 @@ lastName.onblur = () => {
 }
 
 
-firstName.onkeyup = () => isBlurLastName ? ValidatorFirstName() : null
+firstName.onkeyup = () => isBlurLastName || ThereWasFormSubmission ? ValidatorFirstName() : null
 
-lastName.onkeyup = () => isBlurFirstName ? ValidatorLastName() : null
+lastName.onkeyup = () => isBlurFirstName || ThereWasFormSubmission ? ValidatorLastName() : null
 
 
 
@@ -44,14 +45,17 @@ function ValidatorFirstName() {
     if (firstName.value === '') {
         FirstNameErrorText.classList.add('error_text')
         FirstNameErrorText.innerHTML = errorMessage.FirstNameEmpty
+        firstName.classList.add('invalidStyle')
         FirstNameIsValid = false
     } else if (firstName.value.length < 3) {
         FirstNameErrorText.classList.add('error_text')
         FirstNameErrorText.innerHTML = errorMessage.FirstNameless3
+        firstName.classList.add('invalidStyle')
         FirstNameIsValid = false
     } else if (firstName.value.length > 60) {
         FirstNameErrorText.classList.add('error_text')
         FirstNameErrorText.innerHTML = errorMessage.FirstNameMore60
+        firstName.classList.add('invalidStyle')
         FirstNameIsValid = false
     }
     else {
@@ -64,14 +68,17 @@ function ValidatorLastName() {
     if (lastName.value === '') {
         LastNameErrorText.classList.add('error_text')
         LastNameErrorText.innerHTML = errorMessage.LastNameEmpty
+        lastName.classList.add('invalidStyle')
         LastNameIsValid = false
     } else if (lastName.value.length < 3) {
         LastNameErrorText.classList.add('error_text')
         LastNameErrorText.innerHTML = errorMessage.LastNameless3
+        lastName.classList.add('invalidStyle')
         LastNameIsValid = false
     } else if (lastName.value.length > 60) {
         LastNameErrorText.classList.add('error_text')
         LastNameErrorText.innerHTML = errorMessage.LastNameMore60
+        lastName.classList.add('invalidStyle')
         LastNameIsValid = false
     }
     else {

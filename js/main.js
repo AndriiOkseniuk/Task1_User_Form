@@ -9,12 +9,23 @@ const firstName = document.getElementById("firstName")
 const lastName = document.getElementById("lastName")
 const FirstNameErrorText = document.getElementsByClassName("FirstName_errortext")[0]
 const LastNameErrorText = document.getElementsByClassName("LastName_errortext")[0]
-
+const YourNameMessage = document.getElementById("YourNameMessage")
+const LastNameMessage = document.getElementById("LastNameMessage")
+const form_message_container = document.querySelector('.form_message_container')
+const form_message__btn = document.querySelector('.form_message__btn')
 const form = document.getElementById("form")
+
+let ThereWasFormSubmission = false
+
+
+form_message__btn.addEventListener("click", () =>{
+    form_message_container.style.display = "none";
+})
 
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
+    ThereWasFormSubmission = true;
 
     const data = {
         firstName: firstName.value,
@@ -24,8 +35,8 @@ form.addEventListener('submit', (e) => {
     //If the inputs are empty, a validation error is reported
     if (firstName.value === '') {
         ValidatorFirstName()
-    } 
-    
+    }
+
     if (lastName.value === '') {
         ValidatorLastName()
     }
@@ -35,7 +46,6 @@ form.addEventListener('submit', (e) => {
     if (FirstNameIsValid && LastNameIsValid) {
         Fetch(data)
     }
-
 })
 
 
@@ -54,7 +64,7 @@ function Fetch(data) {
                 response.text().then(message => {
                     let p = document.createElement("p")
                     p.innerHTML = `${JSON.parse(message).error}`
-                    p.style.color = "red";
+                    p.style.color = "#b00020";
                     p.style.position = "absolute";
                     p.style.top = "10px";
 
@@ -77,22 +87,9 @@ function Fetch(data) {
                 firstName.value = ''
                 lastName.value = ''
 
-                let p = document.createElement("p")
-                p.innerHTML = `Success!
-                <br>
-                Your name: ${responsMessage[0].UserData.FirstName};
-                <br> 
-                Your Lastname: ${responsMessage[0].UserData.LastName}`
-                p.style.color = "green";
-                p.style.position = "absolute";
-                p.style.right = "10px";
-                p.style.top = "10px";
-
-                setTimeout(() => {
-                    p.remove();
-                }, 3000);
-
-                form.append(p);
+                YourNameMessage.innerHTML = responsMessage[0].UserData.FirstName
+                LastNameMessage.innerHTML = responsMessage[0].UserData.LastName
+                form_message_container.style.display = "flex";
 
                 defaultStyle()
             }
@@ -132,10 +129,11 @@ function defaultStyle(errorText = 'all') {
     if (errorText === 'all' || errorText === 'FirstName') {
         FirstNameErrorText.classList.remove('error_text')
         FirstNameErrorText.innerHTML = "Enter your name"
+        firstName.classList.remove('invalidStyle')
     } else if (errorText === 'all' || errorText === 'LastName') {
-
         LastNameErrorText.classList.remove('error_text')
         LastNameErrorText.innerHTML = "Enter your last name"
+        lastName.classList.remove('invalidStyle')
     }
 
 }
@@ -145,5 +143,6 @@ export {
     lastName,
     FirstNameErrorText,
     LastNameErrorText,
+    ThereWasFormSubmission,
     defaultStyle
 }
