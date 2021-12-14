@@ -2,12 +2,12 @@
 
 
 function DataValidation($firstName, $lastName, $validationText = array(
-    'FirstNameEmpty' => 'FirstName field is requrire',
-    'LastNameEmpty' => 'LastName field is requrire',
-    'FirstName<3' =>  'FirstName must be more than 3 characters',
-    'LastName<3' =>  'LastName must be more than 3 characters',
-    'FirstName>60' =>  'FirstName must be less than 60 characters',
-    'LastName>60' =>  'LastName must be less than 60 characters'
+    'FirstNameEmpty' => 'First Name field is requrire',
+    'LastNameEmpty' => 'Last Name field is requrire',
+    'FirstNameless3' =>  'First Name must be more than 3 characters',
+    'LastNameless3' =>  'Last Name must be more than 3 characters',
+    'FirstNameMore60' =>  'First Name must be less than 60 characters',
+    'LastNameMore60' =>  'Last Name must be less than 60 characters'
     ))
 {
     $response = array();
@@ -19,15 +19,15 @@ function DataValidation($firstName, $lastName, $validationText = array(
         http_response_code(422);
         $response['firstName'] = $validationText['FirstNameEmpty'];
 
-    } elseif (strlen($firstName)<3) {
+    } elseif (mb_strlen($firstName)<3) {
 
         http_response_code(422);
-        $response['firstName'] = $validationText['FirstName<3'];
+        $response['firstName'] = $validationText['FirstNameless3'];
 
-    } elseif (strlen($firstName)>60) {
+    } elseif (mb_strlen($firstName)>60) {
 
         http_response_code(422);
-        $response['firstName'] = $validationText['FirstName>60'];
+        $response['firstName'] = $validationText['FirstNameMore60'];
 
     } 
 
@@ -37,15 +37,15 @@ function DataValidation($firstName, $lastName, $validationText = array(
 
         http_response_code(422);
         $response['lastName'] = $validationText['LastNameEmpty'];
-    } elseif(strlen($lastName)<3) {
+    } elseif(mb_strlen($lastName)<3) {
 
         http_response_code(422);
-        $response['lastName'] = $validationText['LastName<3'];
+        $response['lastName'] = $validationText['LastNameless3'];
 
-    } elseif (strlen($lastName)>60) {
+    } elseif (mb_strlen($lastName)>60) {
 
         http_response_code(422);
-        $response['lastName'] = $validationText['LastName>60'];
+        $response['lastName'] = $validationText['LastNameMore60'];
     }
 
 

@@ -7,6 +7,12 @@ $firstName = $_POST["firstName"];
 $lastName = $_POST["lastName"];
 
 
+$firstName = trim($firstName);
+$lastName = trim($lastName);
+$firstName = htmlspecialchars($firstName);
+$lastName = htmlspecialchars($lastName);
+
+
 $resultValidation = DataValidation($firstName, $lastName);
 
 
@@ -15,12 +21,12 @@ if (empty($resultValidation[1])) {
     echo json_encode($resultValidation);
     
 } else {
+
+    $query = "INSERT INTO `users`(`FirstName`, `LastName` ) VALUES ('$firstName','$lastName')";
+
+    $pdo->query($query);
+
     echo json_encode($resultValidation);
 
-    $query = "INSERT INTO `users`(`LastName`, `FirstName`) VALUES ('$firstName','$lastName')";
-
-     echo $pdo->query($query);
-
-    // echo json_encode($resultValidation);
 }
 
