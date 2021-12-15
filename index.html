@@ -12,58 +12,55 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <div class="container">
 
-
+        <div class="allert">
+            <div class="allert__message">
+                <strong style="font-size: 18px; color: green;">Success!</strong><br><br>
+                <b>Your name: </b><span id="allert__your-name-message">FirstName</span>
+                <br>
+                <br>
+                <b>Last name: </b><span id="allert__last-name-message">LastName</span>
+                
+            </div>
+            <div class="allert__btn">
+                <?xml version="1.0" ?><svg fill="none" height="26" viewBox="0 0 26 26" width="26"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M13 25C19.6274 25 25 19.6274 25 13C25 6.37258 19.6274 1 13 1C6.37258 1 1 6.37258 1 13C1 19.6274 6.37258 25 13 25Z"
+                        stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" />
+                    <path d="M9 9.5L16.7 17.3" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="2" />
+                    <path d="M16.7 9.5L9 17.3" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="2" />
+                </svg>
+            </div>
+        </div>
 
 
         <form class="form" id="form">
+
             <legend>User info</legend>
 
-            <div class="form_message_container">
-                <div class="form_message">
-                    <strong style="font-size: 18px; color: green;">Success!</strong><br><br>
-                    <b>Your name:</b>
-                    <p id="YourNameMessage"> FirstName</p>
-                    <br>
-                    <b> Last name:</b>
-                    <p id="LastNameMessage"> LastName</p>
-                </div>
-                <div class="form_message__btn">
-                    <?xml version="1.0" ?><svg fill="none" height="26" viewBox="0 0 26 26" width="26"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M13 25C19.6274 25 25 19.6274 25 13C25 6.37258 19.6274 1 13 1C6.37258 1 1 6.37258 1 13C1 19.6274 6.37258 25 13 25Z"
-                            stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" />
-                        <path d="M9 9.5L16.7 17.3" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10"
-                            stroke-width="2" />
-                        <path d="M16.7 9.5L9 17.3" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10"
-                            stroke-width="2" />
-                    </svg>
-                </div>
-            </div>
-
-
-            <div class="input_wrapper">
+            <div class="form__input-wrapper">
                 <label for="firstName">First name</label>
-                <input autocomplete="off" type="text" name="firstName" id="firstName" class="form_input"
+                <input autocomplete="off" type="text" name="firstName" id="firstName" class="form__input"
                     placeholder="Input first name">
-                <span class="helper_text FirstName_errortext">Enter your name</span>
+                <span class="form__helper-text form__helper-text_error-first-name">Enter your name</span>
             </div>
-
-            <div class="input_wrapper">
+            <div class="form__input-wrapper">
                 <label for="lastName">Last name</label>
-                <input autocomplete="off" type="text" name="lastName" id="lastName" class="form_input"
+                <input autocomplete="off" type="text" name="lastName" id="lastName" class="form__input"
                     placeholder="Input last name">
-                <span class="helper_text LastName_errortext">Enter your last name</span>
+                <span class="form__helper-text form__helper-text_error-last-name">Enter your last name</span>
             </div>
 
-            <button type="submit" class="form_btn">Submit</button>
+            <button type="submit" class="form__submit-btn">Submit</button>
 
         </form>
 
@@ -71,6 +68,7 @@
 
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/validator.js"></script>
+    <script type="module" src="utils/constants.js"></script>
 
 </body>
 
