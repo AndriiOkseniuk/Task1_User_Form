@@ -1,56 +1,57 @@
 import {
-    FirstNameIsValid,
-    LastNameIsValid,
-    ValidatorFirstName,
-    ValidatorLastName
+    firstNameIsValid,
+    lastNameIsValid,
+    validatorFirstName,
+    validatorLastName
 } from './validator.js'
 
-const firstName = document.getElementById("firstName")
-const lastName = document.getElementById("lastName")
-const FirstNameErrorText = document.getElementsByClassName("FirstName_errortext")[0]
-const LastNameErrorText = document.getElementsByClassName("LastName_errortext")[0]
-const YourNameMessage = document.getElementById("YourNameMessage")
-const LastNameMessage = document.getElementById("LastNameMessage")
-const form_message_container = document.querySelector('.form_message_container')
-const form_message__btn = document.querySelector('.form_message__btn')
-const form = document.getElementById("form")
+const FIRST_NAME = document.querySelector("#firstName")
+const LAST_NAME = document.querySelector("#lastName")
 
-let ThereWasFormSubmission = false
+const FIRST_NAME_ERROR_TEXT = document.querySelector(".form__helper-text_error-first-name")
+const LAST_NAME_ERROR_TEXT = document.querySelector(".form__helper-text_error-last-name")
+const YOUR_NAME_MESSAGE = document.querySelector("#allert__your-name-message")
+const LAST_NAME_MESSAGE = document.querySelector("#allert__last-name-message")
+const ALLERT = document.querySelector('.allert')
+const ALLERT_BTN = document.querySelector('.allert__btn')
+const FORM = document.querySelector("#form")
+
+let thereWasFormSubmission = false
 
 
-form_message__btn.addEventListener("click", () => {
-    form_message_container.style.display = "none";
+ALLERT_BTN.addEventListener("click", () => {
+    ALLERT.classList.remove("allert_show")
 })
 
 
-form.addEventListener('submit', (e) => {
+FORM.addEventListener('submit', (e) => {
     e.preventDefault()
-    ThereWasFormSubmission = true;
+    thereWasFormSubmission = true;
 
     const data = {
-        firstName: firstName.value,
-        lastName: lastName.value,
+        firstName: FIRST_NAME.value,
+        lastName: LAST_NAME.value,
     };
 
     //If the inputs are empty, a validation error is reported
-    if (firstName.value === '') {
-        ValidatorFirstName()
+    if (FIRST_NAME.value === '') {
+        validatorFirstName()
     }
 
-    if (lastName.value === '') {
-        ValidatorLastName()
+    if (LAST_NAME.value === '') {
+        validatorLastName()
     }
 
 
     //Successful form submit
-    if (FirstNameIsValid && LastNameIsValid) {
-        Fetch(data)
+    if (firstNameIsValid && lastNameIsValid) {
+        fetchData(data)
     }
 
 })
 
 
-function Fetch(data) {
+function fetchData(data) {
     fetch('./php/main.php', {
         method: 'POST',
         headers: {
@@ -62,9 +63,10 @@ function Fetch(data) {
 
             // Message "Unable to establish a connection to the database"
             if (response.status === 503) {
+
                 response.text().then(message => {
                     let p = document.createElement("p")
-                    p.innerHTML = `${JSON.parse(message).error}`
+                    p.textContent = `${JSON.parse(message).error}`
                     p.style.color = "#b00020";
                     p.style.position = "absolute";
                     p.style.top = "10px";
@@ -73,7 +75,7 @@ function Fetch(data) {
                         p.remove();
                     }, 3000);
 
-                    form.append(p);
+                    FORM.append(p);
                 });
             }
 
@@ -85,12 +87,13 @@ function Fetch(data) {
 
             //Successful saving of data
             if (responsMessage[1]) {
-                firstName.value = ''
-                lastName.value = ''
+                FIRST_NAME.value = ''
+                LAST_NAME.value = ''
 
-                YourNameMessage.innerHTML = responsMessage[0].UserData.FirstName
-                LastNameMessage.innerHTML = responsMessage[0].UserData.LastName
-                form_message_container.style.display = "flex";
+                YOUR_NAME_MESSAGE.textContent = responsMessage[0].UserData.FirstName
+                LAST_NAME_MESSAGE.textContent = responsMessage[0].UserData.LastName
+
+                ALLERT.classList.add("allert_show")
 
                 defaultStyle()
             }
@@ -102,21 +105,21 @@ function Fetch(data) {
                 const lastNameText = responsMessage[0].lastName
 
                 if (firstNameText) {
-                    FirstNameErrorText.classList.add('error_text')
-                    FirstNameErrorText.innerHTML = firstNameText
+                    FIRST_NAME_ERROR_TEXT.classList.add('form__error_text')
+                    FIRST_NAME_ERROR_TEXT.textContent = firstNameText
 
                 } else {
-                    FirstNameErrorText.classList.remove('error_text')
-                    FirstNameErrorText.innerHTML = "Enter your name"
+                    FIRST_NAME_ERROR_TEXT.classList.remove('form__error_text')
+                    FIRST_NAME_ERROR_TEXT.textContent = "Enter your name"
                 }
 
 
                 if (lastNameText) {
-                    LastNameErrorText.classList.add('error_text')
-                    LastNameErrorText.innerHTML = lastNameText
+                    LAST_NAME_ERROR_TEXT.classList.add('form__error_text')
+                    LAST_NAME_ERROR_TEXT.textContent = lastNameText
                 } else {
-                    LastNameErrorText.classList.remove('error_text')
-                    LastNameErrorText.innerHTML = "Enter your last name"
+                    LAST_NAME_ERROR_TEXT.classList.remove('form__error_text')
+                    LAST_NAME_ERROR_TEXT.textContent = "Enter your last name"
                 }
             }
         })
@@ -127,38 +130,31 @@ function Fetch(data) {
 
 function defaultStyle(errorText = 'all') {
 
-    if (errorText === 'FirstName') {
-        resetStyleFirstName()
-    }
+    resetDataForm(errorText)
 
-    if (errorText === 'LastName') {
-        resetStyleLastName()
-    }
-
-    if (errorText === 'all') {
-        resetStyleFirstName()
-        resetStyleLastName()
+    function resetDataForm(errorText) {
+        errorText === 'FirstName' ? resetStyleFirstName() : null
+        errorText === 'LastName' ? resetStyleLastName() : null
+        errorText === 'all' ? (resetStyleFirstName(), resetStyleLastName()) : null
     }
 
     function resetStyleFirstName() {
-        FirstNameErrorText.classList.remove('error_text')
-        FirstNameErrorText.innerHTML = "Enter your name"
-        firstName.classList.remove('invalidStyle')
+        FIRST_NAME_ERROR_TEXT.classList.remove('form__error_text')
+        FIRST_NAME_ERROR_TEXT.textContent = "Enter your name"
+        FIRST_NAME.classList.remove('invalidStyle')
     }
 
     function resetStyleLastName() {
-        LastNameErrorText.classList.remove('error_text')
-        LastNameErrorText.innerHTML = "Enter your last name"
-        lastName.classList.remove('invalidStyle')
+        LAST_NAME_ERROR_TEXT.classList.remove('form__error_text')
+        LAST_NAME_ERROR_TEXT.textContent = "Enter your last name"
+        LAST_NAME.classList.remove('invalidStyle')
     }
 
 }
 
 export {
-    firstName,
-    lastName,
-    FirstNameErrorText,
-    LastNameErrorText,
-    ThereWasFormSubmission,
+    FIRST_NAME_ERROR_TEXT,
+    LAST_NAME_ERROR_TEXT,
+    thereWasFormSubmission,
     defaultStyle
 }

@@ -1,96 +1,95 @@
+import ERROR_MESSAGE from '../utils/constants.js'
 import {
-    firstName as FirstNameInput,
-    lastName as LastNameInput,
-    FirstNameErrorText,
-    LastNameErrorText,
+    FIRST_NAME_ERROR_TEXT,
+    LAST_NAME_ERROR_TEXT,
     defaultStyle,
-    ThereWasFormSubmission
+    thereWasFormSubmission
 } from './main.js'
 
 
-let FirstNameIsValid = false
-let LastNameIsValid = false
+const FIRST_NAME = document.querySelector("#firstName")
+const LAST_NAME = document.querySelector("#lastName")
 
-const errorMessage = {
-    "FirstNameEmpty": "First Name field is requrire",
-    "LastNameEmpty": "Last Name field is requrire",
-    "FirstNameless3": "First Name must be more than 3 characters",
-    "LastNameless3": "Last Name must be more than 3 characters",
-    "FirstNameMore60": "First Name must be less than 60 characters",
-    "LastNameMore60": "Last Name must be less than 60 characters"
-}
-
+let firstNameIsValid = false
+let lastNameIsValid = false
 
 let isBlurLastName = false;
 let isBlurFirstName = false;
 
-firstName.onblur = () => {
-    ValidatorFirstName()
+
+FIRST_NAME.onblur = () => {
+    validatorFirstName()
     isBlurLastName = true
 }
 
-lastName.onblur = () => {
-    ValidatorLastName()
+LAST_NAME.onblur = () => {
+    validatorLastName()
     isBlurFirstName = true
 }
 
 
-firstName.onkeyup = () => isBlurLastName || ThereWasFormSubmission ? ValidatorFirstName() : null
+FIRST_NAME.onkeyup = () => isBlurLastName || thereWasFormSubmission ? validatorFirstName() : null
 
-lastName.onkeyup = () => isBlurFirstName || ThereWasFormSubmission ? ValidatorLastName() : null
+LAST_NAME.onkeyup = () => isBlurFirstName || thereWasFormSubmission ? validatorLastName() : null
 
 
 
-function ValidatorFirstName() {
-    if (firstName.value === '') {
-        FirstNameErrorText.classList.add('error_text')
-        FirstNameErrorText.innerHTML = errorMessage.FirstNameEmpty
-        firstName.classList.add('invalidStyle')
-        FirstNameIsValid = false
-    } else if (firstName.value.length < 3) {
-        FirstNameErrorText.classList.add('error_text')
-        FirstNameErrorText.innerHTML = errorMessage.FirstNameless3
-        firstName.classList.add('invalidStyle')
-        FirstNameIsValid = false
-    } else if (firstName.value.length > 60) {
-        FirstNameErrorText.classList.add('error_text')
-        FirstNameErrorText.innerHTML = errorMessage.FirstNameMore60
-        firstName.classList.add('invalidStyle')
-        FirstNameIsValid = false
-    }
-    else {
-        defaultStyle('FirstName')
-        FirstNameIsValid = true
-    }
+function validatorFirstName() {
+    if (FIRST_NAME) {
+        if (FIRST_NAME.value === '') {
+            FIRST_NAME_ERROR_TEXT.classList.add('form__error_text')
+            FIRST_NAME_ERROR_TEXT.textContent = ERROR_MESSAGE.FirstNameEmpty
+            FIRST_NAME.classList.add('invalidStyle')
+            firstNameIsValid = false
+        } else if (FIRST_NAME.value.length < 3) {
+            FIRST_NAME_ERROR_TEXT.classList.add('form__error_text')
+            FIRST_NAME_ERROR_TEXT.textContent = ERROR_MESSAGE.FirstNameless3
+            FIRST_NAME.classList.add('invalidStyle')
+            firstNameIsValid = false
+        } else if (FIRST_NAME.value.length > 60) {
+            FIRST_NAME_ERROR_TEXT.classList.add('form__error_text')
+            FIRST_NAME_ERROR_TEXT.textContent = ERROR_MESSAGE.FirstNameMore60
+            FIRST_NAME.classList.add('invalidStyle')
+            firstNameIsValid = false
+        }
+        else {
+            defaultStyle('FirstName')
+            firstNameIsValid = true
+        }
+    } else throw console.error("FIRST_NAME null or undefined");
+
 }
 
-function ValidatorLastName() {
-    if (lastName.value === '') {
-        LastNameErrorText.classList.add('error_text')
-        LastNameErrorText.innerHTML = errorMessage.LastNameEmpty
-        lastName.classList.add('invalidStyle')
-        LastNameIsValid = false
-    } else if (lastName.value.length < 3) {
-        LastNameErrorText.classList.add('error_text')
-        LastNameErrorText.innerHTML = errorMessage.LastNameless3
-        lastName.classList.add('invalidStyle')
-        LastNameIsValid = false
-    } else if (lastName.value.length > 60) {
-        LastNameErrorText.classList.add('error_text')
-        LastNameErrorText.innerHTML = errorMessage.LastNameMore60
-        lastName.classList.add('invalidStyle')
-        LastNameIsValid = false
-    }
-    else {
-        defaultStyle('LastName')
-        LastNameIsValid = true
-    }
+function validatorLastName() {
+    if (LAST_NAME) {
+        if (LAST_NAME.value === '') {
+            LAST_NAME_ERROR_TEXT.classList.add('form__error_text')
+            LAST_NAME_ERROR_TEXT.textContent = ERROR_MESSAGE.LastNameEmpty
+            LAST_NAME.classList.add('invalidStyle')
+            lastNameIsValid = false
+        } else if (LAST_NAME.value.length < 3) {
+            LAST_NAME_ERROR_TEXT.classList.add('form__error_text')
+            LAST_NAME_ERROR_TEXT.textContent = ERROR_MESSAGE.LastNameless3
+            LAST_NAME.classList.add('invalidStyle')
+            lastNameIsValid = false
+        } else if (LAST_NAME.value.length > 60) {
+            LAST_NAME_ERROR_TEXT.classList.add('form__error_text')
+            LAST_NAME_ERROR_TEXT.textContent = ERROR_MESSAGE.LastNameMore60
+            LAST_NAME.classList.add('invalidStyle')
+            lastNameIsValid = false
+        }
+        else {
+            defaultStyle('LastName')
+            lastNameIsValid = true
+        }
+    } else throw console.error("LAST_NAME null or undefined");
+
 }
 
 
 export {
-    FirstNameIsValid,
-    LastNameIsValid,
-    ValidatorFirstName,
-    ValidatorLastName
+    firstNameIsValid,
+    lastNameIsValid,
+    validatorFirstName,
+    validatorLastName
 }
