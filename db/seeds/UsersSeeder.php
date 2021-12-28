@@ -18,7 +18,7 @@ class UsersSeeder extends AbstractSeed
     {
         $faker = Faker\Factory::create('ru_RU');
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5000; $i++) {
             $data = [
                 [
                     'first_name' => $faker->firstName(),

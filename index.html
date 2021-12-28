@@ -21,11 +21,17 @@
 
         <div class="allert">
             <div class="allert__message">
-                <strong style="font-size: 18px; color: green;">Success!</strong><br><br>
-                <b>Your name: </b><span id="allert__your-name-message">FirstName</span>
-                <br>
-                <br>
-                <b>Last name: </b><span id="allert__last-name-message">LastName</span>
+                <p class="allert__message_title">Успех!</p>
+                <div>
+                    <b>Ваше имя: </b><span id="allert__your-name-message">Имя</span>
+                </div>
+
+                <div>
+                    <b>Ваша фамилия: </b><span id="allert__last-name-message">Фамилия</span>
+                </div>
+
+                <p class="get__users-btn">Показать список пользователей</p>
+                <div id="allert__users-list-id" class="allert__users-list"></div>
 
             </div>
             <div class="allert__btn">
@@ -42,8 +48,6 @@
             </div>
         </div>
 
-        <span class="get__users-btn">Список пользователей &#9658;</span>
-        
         <form class="form" id="form">
 
             <legend>Форма пользователя</legend>
@@ -136,11 +140,12 @@
         </form>
 
     </div>
-<script type="module" src="js/validator.js"></script>
+    <script type="module" src="js/validator.js"></script>
     <script type="module" src="js/main.js"></script>
-    
+
     <script type="module" src="utils/constants.js"></script>
     <script type="module" src="/js/usersListPage/usersList.js"></script>
+    <script type="module" src="/js/successAlert/successAlert.js"></script>
 
 </body>
 

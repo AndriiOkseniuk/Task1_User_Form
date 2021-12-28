@@ -23,40 +23,32 @@ ORDER BY users.created_at DESC";
 $sth = $pdo->query($sqlQuery);
 $row = $sth->fetch();
 
-echo '<a href="http://user-form/" style="text-decoration: none; color: rgba(0,0,0,90%)">&#9668; Назад</a>';
-echo "<br>";
-echo "<br>";
-echo "<h3>" . "Количесто пользователей: " . $usersCount . "</h3>" . "<br>";
+// echo '<a href="http://user-form/" style="text-decoration: none; color: rgba(0,0,0,90%)">&#9668; Назад</a>';
+// echo "<br>";
+// echo "<br>";
+// echo "<h3>" . "Количесто пользователей: " . $usersCount . "</h3>" . "<br>";
 
+$arrResult = [];
 
+$arrResult['total'] = $usersCount;
 do {
-    echo "<br>";
-    echo "<b>id:</b> " . $row['id'] . "<br>";
-    echo "<b>Имя:</b> " . $row['first_name'] . "<br>";
-    echo "<b>Фамилия:</b> " . $row['last_name'] . "<br>";
+    $resObj = array(
+        "id" => $row['id'],
+        "first_name" => $row['first_name'],
+        "last_name" => $row['last_name'],
+        "station" => $row['station'],
+        "is_car" => $row['is_car'],
+        "lunche" => $row['lunche'],
+        "breakfast" => $row['breakfast'],
+        "message" => $row['message'],
+        "created_at" => $row['created_at']
+    );
 
-
-    $is_car = $row['is_car'] ? "<b>Есть авто</b>" . "<br>" :  "<b>Нет авто</b>" . "<br>";
-    echo $is_car;
-
-
-    $is_lunche = $row['lunche'] ? "<b>Обеды:</b> да" . "<br>" :  "<b>Обеды:</b> нет" . "<br>";
-    echo $is_lunche;
-
-
-    $is_breakfast = $row['breakfast'] ? "<b>Завтраки:</b> да" . "<br>" :  "<b>Завтраки:</b> нет" . "<br>";
-    echo $is_breakfast;
-
-
-    echo "<b>Сообщение:</b> " . $row['message'] . "<br>";
-    echo "<b>Станция метро:</b> " . $row['station'] . "<br>";
-    echo "<b>Дата регистрации:</b> " . $row['created_at'];
-    echo "<hr>";
-    echo "<br>";
+    $arrResult['users'][] = $resObj;
 } while ($row = $sth->fetch());
 
 
 
-
+echo json_encode($arrResult);
 
 http_response_code(200);

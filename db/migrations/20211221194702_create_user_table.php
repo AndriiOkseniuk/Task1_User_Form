@@ -26,8 +26,8 @@ final class CreateUserTable extends AbstractMigration
 
         // Create user table
         $table = $this->table('users');
-        $table->addColumn('first_name', 'string',  ['limit' => 50, 'null' => false])
-            ->addColumn('last_name', 'string', ['limit' => 50, 'null' => false])
+        $table->addColumn('first_name', 'string',  ['limit' => 60, 'null' => false])
+            ->addColumn('last_name', 'string', ['limit' => 60, 'null' => false])
             ->addColumn('station_id', 'integer', ['null' => false])
             ->addColumn('is_car', 'boolean', ['default' => false])
             ->addColumn('lunche', 'boolean', ['default' => false])

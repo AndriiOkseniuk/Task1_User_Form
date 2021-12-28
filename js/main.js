@@ -11,6 +11,8 @@ import {
     validatorTextareaMessage
 } from './validator.js'
 
+import { showSuccessAlert } from './successAlert/successAlert.js'
+
 const FIRST_NAME = document.querySelector("#firstName")
 const LAST_NAME = document.querySelector("#lastName")
 const USER_STATION = document.querySelector('#form__select-station_item-id')
@@ -24,10 +26,7 @@ const LAST_NAME_ERROR_TEXT = document.querySelector(".form__helper-text_error-la
 const STATION_ID_ERROR_TEXT = document.querySelector('.form__helper-text_error-station-id')
 const MESSAGE_ERROR_TEXT = document.querySelector('.form__helper-text_error-message')
 const MENU_ERROR_TEXT = document.querySelector('.form__helper-text_error-menu')
-const YOUR_NAME_MESSAGE = document.querySelector("#allert__your-name-message")
-const LAST_NAME_MESSAGE = document.querySelector("#allert__last-name-message")
-const ALLERT = document.querySelector('.allert')
-const ALLERT_BTN = document.querySelector('.allert__btn')
+
 const FORM = document.querySelector("#form")
 const DISABLE_FRONT_VALIDATION = document.querySelector('#form__disable-front-validation-id')
 
@@ -35,9 +34,7 @@ const DISABLE_FRONT_VALIDATION = document.querySelector('#form__disable-front-va
 let thereWasFormSubmission = false
 
 
-ALLERT_BTN.addEventListener("click", () => {
-    ALLERT.classList.remove("allert_show")
-})
+
 
 
 FORM.addEventListener('submit', (e) => {
@@ -116,13 +113,16 @@ function fetchData(data) {
 
             //Successful saving of data
             if (responsMessage[1]) {
+
                 FIRST_NAME.value = ''
                 LAST_NAME.value = ''
+                USER_STATION.value = ''
+                USER_IS_CAR.checked = false
+                USER_MENU_LUNCHES.checked = false
+                USER_MENU_BREAKFASTS.checked = false
+                USER_MESSAGE.value = ''
 
-                YOUR_NAME_MESSAGE.textContent = responsMessage[0].UserData.FirstName
-                LAST_NAME_MESSAGE.textContent = responsMessage[0].UserData.LastName
-
-                ALLERT.classList.add("allert_show")
+                showSuccessAlert(responsMessage[0].UserData.FirstName, responsMessage[0].UserData.LastName)
 
                 defaultStyle()
             }
@@ -143,7 +143,7 @@ function fetchData(data) {
 
                 } else {
                     FIRST_NAME_ERROR_TEXT.classList.remove('form__error_text')
-                    FIRST_NAME_ERROR_TEXT.textContent = "Enter your name"
+                    FIRST_NAME_ERROR_TEXT.textContent = "Введите ваше имя"
                 }
 
                 //displaying a validation error message for lasr name field
@@ -152,7 +152,7 @@ function fetchData(data) {
                     LAST_NAME_ERROR_TEXT.textContent = lastNameText
                 } else {
                     LAST_NAME_ERROR_TEXT.classList.remove('form__error_text')
-                    LAST_NAME_ERROR_TEXT.textContent = "Enter your last name"
+                    LAST_NAME_ERROR_TEXT.textContent = "Введите вашу фамилию"
                 }
 
                 //displaying a validation error message for station select
