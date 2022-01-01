@@ -23,11 +23,6 @@ ORDER BY users.created_at DESC";
 $sth = $pdo->query($sqlQuery);
 $row = $sth->fetch();
 
-// echo '<a href="http://user-form/" style="text-decoration: none; color: rgba(0,0,0,90%)">&#9668; Назад</a>';
-// echo "<br>";
-// echo "<br>";
-// echo "<h3>" . "Количесто пользователей: " . $usersCount . "</h3>" . "<br>";
-
 $arrResult = [];
 
 $arrResult['total'] = $usersCount;

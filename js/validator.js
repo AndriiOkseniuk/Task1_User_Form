@@ -132,8 +132,6 @@ function validatorSelectOfStation() {
 function validatorCheckboxesMenu() {
     if (USER_MENU_LUNCHES && USER_MENU_BREAKFASTS) {
         if (USER_MENU_LUNCHES.checked === false && USER_MENU_BREAKFASTS.checked === false) {
-            // MENU_ERROR_TEXT.classList.add('form__error_text')
-            // MENU_ERROR_TEXT.textContent = ERROR_MESSAGE.menuEmpty
             addErrorStyles(null, MENU_ERROR_TEXT, ERROR_MESSAGE.menuEmpty)
             checkboxesMenuIsValid = false
         } else {

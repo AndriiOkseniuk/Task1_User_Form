@@ -6,7 +6,7 @@ const ERROR_MESSAGE = {
     "FirstNameMore60": "Имя должно быть меньше 60 символов (front)",
     "LastNameMore60": "Фамилия должна быть меньше 60 символов (front)",
     "stationIsEmpty": "Нужно выбрать станицю метро (front)",
-    "stationNotExist": "Выбранная вами станция не существует (front)",
+    "stationNotExist": "Выбранная станция не существует (front)",
     "menuEmpty": "Выберите обеды или завтраки (front)",
     "messageMore500": "Сообщение не может быть больше 500 символов (front)",
 }

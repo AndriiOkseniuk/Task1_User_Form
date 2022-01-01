@@ -35,8 +35,6 @@ let thereWasFormSubmission = false
 
 
 
-
-
 FORM.addEventListener('submit', (e) => {
     e.preventDefault()
     thereWasFormSubmission = true;

@@ -8,7 +8,7 @@ function DataValidation($userData, $validationText = array(
     'FirstNameMore60' =>  'Имя должно быть меньше 60 символов (back)',
     'LastNameMore60' =>  'Фамилия должна быть меньше 60 символов (back)',
     'stationIdEmpty' => 'Нужно выбрать станцию метро (back)',
-    'stationNotExist' => 'Выбранная вами станция не существует (back)',
+    'stationNotExist' => 'Выбранная станция не существует (back)',
     'messageMore500' => 'Сообщение не может быть больше 500 символов (back)',
     'menuEmpty' => 'Выберите обеды или завтраки (back)'
     ))
