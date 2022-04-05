@@ -1,10 +1,14 @@
 const ERROR_MESSAGE = {
-    "FirstNameEmpty": "First Name field is required",
-    "LastNameEmpty": "Last Name field is required",
-    "FirstNameless3": "First Name must be more than 3 characters",
-    "LastNameless3": "Last Name must be more than 3 characters",
-    "FirstNameMore60": "First Name must be less than 60 characters",
-    "LastNameMore60": "Last Name must be less than 60 characters"
+    "FirstNameEmpty": "Поле Имя обязательно для заполнения (front)",
+    "LastNameEmpty": "Поле Фамилия обязательно (front)",
+    "FirstNameless3": "Имя не может быть меньше 3 символов (front)",
+    "LastNameless3": "Фамилия не может быть меньше 3 символов (front)",
+    "FirstNameMore60": "Имя должно быть меньше 60 символов (front)",
+    "LastNameMore60": "Фамилия должна быть меньше 60 символов (front)",
+    "stationIsEmpty": "Нужно выбрать станицю метро (front)",
+    "stationNotExist": "Выбранная станция не существует (front)",
+    "menuEmpty": "Выберите обеды или завтраки (front)",
+    "messageMore500": "Сообщение не может быть больше 500 символов (front)",
 }
 
 export default ERROR_MESSAGE;
